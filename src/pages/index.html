@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Call</title>
+</head>
+<body>
+    <h1>API call checking</h1>
+
+    <h2 id="author">Robin</h2>
+    <p class="paratext">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, modi pariatur. Veniam sit at modi fuga nostrum officia libero cupiditate saepe nesciunt neque consequuntur quo pariatur, odio placeat impedit aliquid?</p>
+
+   <script>
+  
+  const authorName = document.getElementById("author");
+const para = document.querySelector(".paratext");
+ 
+const url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=ce21e327317a4f2dac3fdd9cb6bb3c01";
+
+const options = {
+    method : "GET",
+    redirect : "follow",
+}
+
+async function getData() {
+     try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+        console.log(data);
+        console.log(data.articles[6].author);
+        console.log(data.articles[9].description);
+        
+
+        authorName.innerHTML = `${data.articles[6].author}`;
+        para.innerHTML = `${data.articles[9].description}`
+        
+     } catch (error) {
+        console.log(error);
+        
+     }
+}
+getData();
+
+
+   </script>
+</body>
+</html>
